@@ -1,0 +1,228 @@
+# / ===================================================== \
+# |  This is the main configuration file of OreAnnouncer  |
+# \ ===================================================== /
+#
+# For any problem be sure to:
+# - Read the entire documentation on: https://alessiodp.com/docs/oreannouncer/
+# - Join our Discord for further help: https://discord.alessiodp.com/
+#
+
+# / =============================== \
+# |      OREANNOUNCER SETTINGS      |
+# \ =============================== /
+oreannouncer:
+  # [Check for plugins updates]
+  # OreAnnouncer will check for updates when the server finishes to load.
+  updates:
+    check: true
+    warn: true
+
+  # [Enable logging system]
+  # => debug:      Print debug messages
+  # => save-file:  Save any log into a text file
+  logging:
+    debug: false
+    save-file:
+      enable: false
+      format: "%date% [%time%] %message%\n"
+      file: log.txt
+
+  # [Enable debug command]
+  # Useful to debug problems related to the plugin
+  debug-command: true
+
+
+# / =============================== \
+# |        STORAGE  SETTINGS        |
+# \ =============================== /
+storage:
+  # [Database type]
+  # What type of storage the plugin should use? Database storage types:
+  # => mariadb    | [Remote] Save the data into a MariaDB database
+  # => mysql      | [Remote] Save the data into a MySQL database
+  # => postgresql | [Remote] Save the data into a PostgreSQL database
+  # => sqlite     | [File]   Save the data into a SQLite database
+  # => h2         | [File]   Save the data into a H2 database (default)
+  database-storage-type: h2
+
+  storage-settings:
+    # [General SQL settings]
+    # General settings for sql databases, recommended to use default values
+    general-sql-settings:
+      prefix: 'oreannouncer_'
+
+    # [SQLite settings]
+    sqlite:
+      database-file: database.db
+
+    # [H2 settings]
+    h2:
+      database-file: database
+
+    # [Remote SQL settings - MySQL/MariaDB/PostgreSQL]
+    remote-sql:
+      address: localhost
+      port: '3306'
+      database: database
+      username: username
+      password: password
+      # Size of the connection pool
+      pool-size: 10
+      # Lifetime of each connection, in milliseconds (Default: 30 minutes = 1800000ms)
+      connection-lifetime: 1800000
+      # Property used to alert when the connection is not using a valid SSL certificate
+      use-ssl: false
+      charset: 'utf8'
+
+
+# / =============================== \
+# |         ALERTS SETTINGS         |
+# \ =============================== /
+alerts:
+  # [Enable alerts system]
+  # Whenever a player dig a block users/admins/console will receive a message
+  enable: true
+  console: true
+
+
+# / =============================== \
+# |         BLOCKS SETTINGS         |
+# \ =============================== /
+blocks:
+  # Allowed blocks to handle
+  # You can use '*' to handle every block that is received from servers
+  list-allowed:
+    - '*'
+
+
+# / =============================== \
+# |         STATS  SETTINGS         |
+# \ =============================== /
+stats:
+  # [Statistics system]
+  # Start to store any data about destroyed blocks, enables:
+  # => /oa stats:  Show destroyed blocks stats about a player
+  # => /oa top:    Show top players
+  # You can enable/disable every block manually with 'count-on-destroy' option
+  enable: true
+  # Order by:
+  # => priority = Block priority number
+  # => value    = Value
+  order-by: priority
+  # Values: destroy/found
+  values: destroy
+  # Allow values change with the command
+  change-values: false
+  # Insert any block that you want to blacklist from general listing
+  blacklist-blocks:
+    log: []
+    stats: []
+    top:
+      - 'STONE'
+  # [Advanced count]
+  # Store any data about found blocks, this will enable a time tracking logging
+  # of blocks for an improved anti x-ray system.
+  # You have to configure blocks options to use this.
+  advanced-count:
+    enable: true
+    # Time format:
+    # => y          years
+    # => M          months
+    # => d          days
+    # => H          hours
+    # => m          minutes
+    # => s          seconds
+    # => S          milliseconds
+    # => 'text'     arbitrary text content
+    # Formats:
+    # => large   = More than 1 hour
+    # => medium  = More than 1 minute
+    # => small   = More than 1 second
+    default-time-format-large: "H' hours'"
+    default-time-format-medium: "m' minutes'"
+    default-time-format-small: "s' seconds'"
+
+    log-command:
+      enable: true
+      # Simple date format
+      format-date: "yyyy-MM-dd 'at' HH:mm"
+      # See time format above
+      # => large     = More than 1 day
+      # => medium    = More than 1 hour
+      # => small     = More than 1 minute
+      # => smallest  = More than 0
+      format-date-elapsed-large: "d'd' H'h'"
+      format-date-elapsed-medium: "H'h' m'm'"
+      format-date-elapsed-small: "m'm' s's'"
+      format-date-elapsed-smallest: "s's'"
+      number-of-blocks: 8
+  top:
+    enable: true
+    # Order by: destroy/found
+    order-by: destroy
+    # Allow order change with the command
+    change-order: false
+    # Allow block change with the command
+    change-block: true
+    number-of-players: 5
+
+
+# / =============================== \
+# |       WHITELIST  SETTINGS       |
+# \ =============================== /
+whitelist:
+  # [Whitelist system]
+  # Enable a command to whitelist players, so they won't trigger alerts and others stats
+  # => bypass   : Decide what the players bypass
+  enable: true
+  bypass:
+    alerts: true
+    destroy: true
+    found: true
+
+
+# / =============================== \
+# |        COMMANDS SETTINGS        |
+# \ =============================== /
+commands:
+  # Enable tab support (/oab <tab> to see every allowed command)
+  tab-support: true
+  main-commands:
+    oa:
+      command: 'oab'
+      aliases:
+        - oreannouncerb
+  sub-commands:
+    help: help
+    alerts: alerts
+    debug: debug
+    log: log
+    reload: reload
+    stats: stats
+    top: top
+    version: version
+    whitelist: whitelist
+  misc-commands:
+    add: 'add'
+    alert: 'alert'
+    all: 'all'
+    block: 'block'
+    config: 'config'
+    player: 'player'
+    remove: 'remove'
+    word-on: 'on'
+    word-off: 'off'
+  order:
+    - help
+    - alerts
+    - log
+    - stats
+    - top
+    - whitelist
+    - reload
+    - debug
+    - version
+
+
+dont-edit-this:
+  version: 7

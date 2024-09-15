@@ -3,33 +3,33 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.alessiodp.oreannouncer</groupId>
 	<artifactId>oreannouncer</artifactId>
 	<version>2.8.5</version>
 	<packaging>pom</packaging>
-	
+
 	<name>OreAnnouncer</name>
 	<description>Collects data about mined blocks</description>
 	<url>https://alessiodp.com/oreannouncer</url>
-	
+
 	<licenses>
 		<license>
 			<name>AGPL-3.0</name>
 			<url>https://opensource.org/licenses/AGPL-3.0</url>
 		</license>
 	</licenses>
-	
+
 	<issueManagement>
 		<system>GitHub</system>
 		<url>https://github.com/AlessioDP/OreAnnouncer/issues</url>
 	</issueManagement>
-	
+
 	<scm>
 		<connection>scm:git:https://github.com/AlessioDP/OreAnnouncer.git</connection>
 		<url>https://github.com/AlessioDP/OreAnnouncer/</url>
 	</scm>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>alessiodp-repo</id>
@@ -42,44 +42,47 @@
 			<url>https://repo.alessiodp.com/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
-	
+
 	<modules>
 		<module>api</module>
 		<module>bukkit</module>
 		<module>bungeecord</module>
+		<module>velocity</module>
 		<module>common</module>
 		<module>output</module>
 	</modules>
-	
+
 	<properties>
 		<plugin.name>OreAnnouncer</plugin.name>
+		<plugin.id>oreannouncer</plugin.id>
 		<plugin.description>Collects data about mined blocks</plugin.description>
 		<plugin.author>AlessioDP</plugin.author>
 		<plugin.website>https://alessiodp.com/oreannouncer</plugin.website>
 		<plugin.version>${project.version}</plugin.version>
-		
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>8</java.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		
+
 		<maven.compiler.version>3.10.1</maven.compiler.version>
 		<maven.deploy.version>3.0.0</maven.deploy.version>
 		<maven.javadoc-plugin.version>3.4.1</maven.javadoc-plugin.version>
 		<maven.shade.version>3.4.1</maven.shade.version>
 		<maven.surefire.version>3.0.0-M7</maven.surefire.version>
 		<maven.versions.version>2.12.0</maven.versions.version>
-		
+
 		<!-- Dev libraries -->
 		<dev.annotations>23.1.0</dev.annotations>
 		<dev.lombok>1.18.24</dev.lombok>
 		<dev.mockito>4.11.0</dev.mockito>
 		<dev.junit>5.9.1</dev.junit>
-		
+
 		<libs.adpcore>1.8.10</libs.adpcore>
 		<libs.api.spigot>1.20.1-R0.1-SNAPSHOT</libs.api.spigot>
 		<libs.api.bungeecord>1.20-R0.1-SNAPSHOT</libs.api.bungeecord>
+		<libs.api.velocity>3.3.0-SNAPSHOT</libs.api.velocity>
 		<!-- ADP Core Test Libraries -->
 		<libs.h2>1.4.200</libs.h2>
 		<libs.hikaricp>5.0.1</libs.hikaricp>
@@ -87,15 +90,16 @@
 		<libs.mysql>8.0.31</libs.mysql>
 		<libs.postgresql>42.5.1</libs.postgresql>
 		<libs.sqlite>3.40.0.0</libs.sqlite>
-		
+
 		<!-- External plugins -->
-		<libs.discordsrv>1.27.0-SNAPSHOT</libs.discordsrv>
+		<libs.discordsrv>1.27.0</libs.discordsrv>
 		<libs.itemMods>2.0.0-alpha.1</libs.itemMods>
 		<libs.llapi>1.7.4</libs.llapi>
 		<libs.mmoItems>6.9.4-SNAPSHOT</libs.mmoItems>
 		<libs.papi>2.11.3</libs.papi>
+		<libs.redisson>3.34.1</libs.redisson>
 	</properties>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -127,7 +131,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<repositories>
 		<repository>
 			<!-- Maven central -->
@@ -160,7 +164,7 @@
 			<url>https://repo.spongepowered.org/maven</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
